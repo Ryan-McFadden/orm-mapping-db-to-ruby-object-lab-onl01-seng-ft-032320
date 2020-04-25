@@ -10,8 +10,14 @@ class Student
   end
 
   def self.all
-    # retrieve all the rows from the "Students" database
-    # remember each row should be a new instance of the Student class
+    sql = <<-SQL
+      SELECT * 
+      FROM students
+      SQL
+      
+    DB[:conn].execute(sql).collect do |row|
+      self.new_from_db(row)
+    end
   end
 
   def self.find_by_name(name)
@@ -20,9 +26,9 @@ class Student
       WHERE name = ?
       SQL
       
-      DB[:conn].execute(sql, name).collect do |row|
-        self.new_from_db(row)
-      end.first 
+    DB[:conn].execute(sql, name).collect do |row|
+      self.new_from_db(row)
+    end.first 
   end
   
   def save
