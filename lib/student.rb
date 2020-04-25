@@ -3,6 +3,7 @@ class Student
 
   def self.new_from_db(row)
     sql = <<-SQL
+      new_student = self.new
       
   end
 
