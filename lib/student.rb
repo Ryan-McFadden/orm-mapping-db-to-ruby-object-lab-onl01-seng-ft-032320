@@ -19,6 +19,8 @@ class Student
       SELECT * FROM students
       WHERE name = ?
       SQL
+      
+      DB[:conn].execute()
   end
   
   def save
